@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Vábek"
+  given-names: "Jan"
+  orcid: "https://orcid.org/0000-0001-7689-7174"
+- family-names: "Němec"
+  given-names: "Tadeáš"
+  orcid: "https://orcid.org/0009-0003-9110-8913"
+title: "Multiscale modular approach (MMA) for HHG modelling"
+version: 0.8
+date-released: 2025-05-07
+url: "https://github.com/HHG-modelling/MMA-HHG-pre-release-2"
