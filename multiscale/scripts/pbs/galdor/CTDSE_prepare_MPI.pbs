@@ -1,0 +1,28 @@
+#!/bin/bash
+#PBS -N 3_1DTDSE_prepare
+#PBS -l select=1:ncpus=1:mem=4gb:scratch_local=2gb:cl_galdor=True
+#PBS -l walltime=00:01:00
+#PBS -o TDSE_prepare.output
+#PBS -j oe
+#PBS -V
+
+module purge
+load_python_modules
+
+# Echo commands to stdout
+set -x
+
+# echo "$PBS_JOBID is running on node `hostname -f` in a scratch directory $SCRATCHDIR" >> $SUBMITTING_DIRECTORY/jobs_info.txt
+
+# ensure correct work dir
+cd /scratch.shared/jvabek/BG_mono
+echo "Working directory: $(pwd)"
+
+# Launch your application
+python $TDSE_1D_PYTHON/prepare_TDSE_Nz.py
+
+echo "===== PBS job diagnostics for $PBS_JOBID ====="
+qstat -f   "$PBS_JOBID"
+
+echo "===== tracejob ====="
+tracejob -n 1 "$PBS_JOBID"

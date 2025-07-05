@@ -1,0 +1,30 @@
+#!/bin/bash
+#PBS -N 4_MPI-TDSE
+## #PBS -l walltime=48:00:00
+#PBS -o MPI-TDSE.output
+#PBS -j oe
+#PBS -V
+
+
+
+### Purge modules
+module purge
+
+load_modules
+
+set -x
+
+# echo "$PBS_JOBID is running on node `hostname -f` in a scratch directory $SCRATCHDIR" >> $SUBMITTING_DIRECTORY/jobs_info.txt
+
+cd /scratch.shared/jvabek/BG_mono
+
+mpirun $TDSE_1D_HOME/build/TDSE.e # numa
+
+# possibilities to test different options for making MPI run more efficient https://www.open-mpi.org/doc/v3.0/man1/mpirun.1.php
+# mpirun --bind-to socket $TDSE_1D_HOME/build/TDSE.e # numa
+
+echo "===== PBS job diagnostics for $PBS_JOBID ====="
+qstat -f   "$PBS_JOBID"
+
+echo "===== tracejob ====="
+tracejob -n 1 "$PBS_JOBID"
